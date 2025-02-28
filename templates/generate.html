@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brainrotter - Génération</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/generate.css') }}">
+</head>
+
+<body>
+
+    <!-- LANDING -->
+    <section class="app">
+
+        <div>
+            <h1>Génération en cours</h1>
+            <h2>"{{ prompt }}"</h2>
+        </div>
+
+        <div id="loader">
+            <div class="loader"></div>
+        </div>
+
+        <div id="states">
+            <!-- AUTO GENERATED -->
+        </div>
+
+        <div id="progress" style="opacity: 0;">
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="progressBar"></div>
+                <div class="progress-bar-text" id="progressText">0%</div>
+            </div>
+        </div>
+
+        <div id="download">
+            <button id="downloadBtn">
+                <img src="{{ url_for('static', filename='ressources/download_icon.svg') }}" alt="Télécharger">
+                Télécharger
+            </button>
+        </div>
+
+    </section>
+
+
+    <!-- SCRIPT -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="module" src="{{ url_for('static', filename='scripts/generate.js') }}"></script>
+
+</body>
+
+</html>

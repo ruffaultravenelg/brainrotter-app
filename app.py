@@ -1,16 +1,21 @@
 # app.py
-from flask import Flask, request, send_from_directory, Response
+from flask import Flask, request, send_from_directory, render_template, Response
 import subprocess
 import os
 import uuid
 
-# Initialize the Flask app with the static folder "public"
-app = Flask(__name__, static_folder='public', static_url_path='')
+# Initialize the Flask app
+app = Flask(__name__)
 
+# Route pour une page web (retourne du HTML)
 @app.route('/')
-def index():
-    """Serve the homepage."""
-    return send_from_directory(app.static_folder, 'index.html')
+def home():
+    return render_template('index.html')
+
+@app.route('/generate')
+def generatePage():
+    prompt = request.args.get('prompt')
+    return render_template('generate.html', prompt=prompt)
 
 @app.route('/files/<filename>')
 def downloadFile(filename):

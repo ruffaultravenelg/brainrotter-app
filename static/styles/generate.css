@@ -1,0 +1,193 @@
+section.app {
+    background-color: var(--background-1);
+    width: 100%;
+    height: 100vh;
+    padding: 10% 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+h1, h2 {
+    width: 100%;
+    text-align: center;
+}
+
+/* CARD */
+#states{
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    overflow-x: hidden;
+    padding: 50px 40vw 50px 100px;
+    min-height: 400px;
+}
+.card{
+    user-select: none;
+    height: 300px;
+    min-width: 300px;
+    position: relative;
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid var(--input-border);
+    background-color: var(--input-back);
+    transition-duration: 0.2s;
+    opacity: 0;
+    animation: 0.3s card-popup ease-in forwards;
+}
+.card-step{
+    font-size: 40px;
+    font-weight: bold;
+    color: var(--text-1);
+}
+.card-name{
+    font-size: 20px;
+    font-weight: normal;
+    color: var(--text-1);
+}
+.card-description{
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    left: 30px;
+    font-size: 16px;
+    font-weight: normal;
+    color: var(--text-2);
+}
+
+@keyframes card-popup {
+    from{
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ACTIVE */
+.card.active{
+    border: 4px solid var(--primary);
+}
+.card.active > p{
+    color: var(--primary);
+}
+.card.active > .card-description{
+    color: var(--primary-darker);
+}
+
+/* PENDING */
+.card.pending > p{
+    color: #BFBFBF;
+}
+.card.pending > .card-description{
+    color: #E8E8E8;
+}
+
+/* PROGRESS BAR */
+#progress{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.6s cubic-bezier(0.55, 0, 1, 0.45);
+}
+#progress.hidding{
+    opacity: 0;
+    transform: translateY(150px);
+}
+.progress-bar-container {
+    width: 60%;
+    height: 20px;
+    background-color: var(--input-back);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+.progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: repeating-linear-gradient(45deg,
+            var(--primary) 0,
+            var(--primary) 10px,
+            var(--primary-darker) 10px,
+            var(--primary-darker) 20px);
+    transition: width 0.4s ease;
+    animation: moveBackground 20s linear infinite;
+}
+
+@keyframes moveBackground {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 1000px 0;
+    }
+}
+.progress-bar-text {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--input-border);
+    font-weight: bold;
+    pointer-events: none;
+}
+
+/* LOADER */
+#loader{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.loader {
+    height: 4px;
+    width: 130px;
+    --c:no-repeat linear-gradient(var(--input-border) 0 0);
+    background: var(--c),var(--c),var(--text-1);
+    background-size: 60% 100%;
+    animation: l16 3s infinite;
+}
+@keyframes l16 {
+    0%   {background-position:-150% 0,-150% 0}
+    66%  {background-position: 250% 0,-150% 0}
+    100% {background-position: 250% 0, 250% 0}
+}
+
+/* DOWNLOAD */
+#download{
+    position: fixed;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    bottom: 10%;
+    opacity: 0;
+    transition: 0.4s ease;
+}
+#download.active{
+    opacity: 1;
+}
+#downloadBtn{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+#downloadBtn > img{
+    width: 30px;
+    height: 30px;
+}

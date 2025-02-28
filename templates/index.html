@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brainrotter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
+</head>
+<body>
+
+    <!-- LANDING -->
+    <section class="landing">
+        <h1>Générez un Brainrot</h1>
+        <h2>Donnez une direction a la vidéo</h2>
+        <input type="text" id="promptInput" placeholder="Top 10 des races de chats préférées des Français" tabindex="1">
+        <button id="generateBtn" tabindex="2">Générer</button>
+    </section>
+    
+    <!-- SCRIPT -->
+    <script type="module" src="{{ url_for('static', filename='scripts/index.js') }}"></script>
+
+</body>
+</html>

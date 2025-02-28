@@ -4,8 +4,8 @@ import subprocess
 from flask import request, Response
 
 # Chemins de dossiers
-GENERATOR_FOLDER = r'../brainrot'
-FILES_FOLDER = r'files'
+GENERATOR_FOLDER = os.getenv('GENERATOR_FOLDER', r'/home//brainrot')
+FILES_FOLDER = os.getenv('FILES_FOLDER', r'files')
 
 def getOutputFileName():
     """Ensure the output folder exists and return a unique output file path."""

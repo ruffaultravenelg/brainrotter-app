@@ -3,13 +3,9 @@ import uuid
 import subprocess
 from flask import request, Response
 
-# Chemins de dossiers
-GENERATOR_FOLDER = os.getenv('GENERATOR_FOLDER', r'/home/ubuntu/brainrotter')
-FILES_FOLDER = os.getenv('FILES_FOLDER', r'files')
-PYTHON = os.getenv('PYTHON', 'python')
-
 def getOutputFileName():
     """Ensure the output folder exists and return a unique output file path."""
+    FILES_FOLDER = os.getenv('FILES_FOLDER')
     if not os.path.exists(FILES_FOLDER):
         os.makedirs(FILES_FOLDER)
     filename = uuid.uuid4()
@@ -20,14 +16,14 @@ def generateFromScript():
     script = request.args.get('script')
     if not script:
         return Response('No script provided', status=400)
-
-    scriptPath = os.path.join(GENERATOR_FOLDER, 'script.txt')
+    
+    scriptPath = os.path.join(os.getenv('GENERATOR_FOLDER'), 'script.txt')
     with open(scriptPath, 'w') as scriptFile:
         scriptFile.write(script)
 
     filename, outputPath = getOutputFileName()
 
-    command = [PYTHON, '-u', os.path.join(GENERATOR_FOLDER, "main.py"), '-s', scriptPath, '-o', outputPath]
+    command = [os.getenv('PYTHON'), '-u', os.path.join(os.getenv('GENERATOR_FOLDER'), "main.py"), '-s', scriptPath, '-o', outputPath]
 
     return streamOutput(command, scriptPath, filename)
 
@@ -38,7 +34,7 @@ def generateFromPrompt():
         return Response('No prompt provided', status=400)
 
     filename, outputPath = getOutputFileName()
-    command = [PYTHON, '-u', os.path.join(GENERATOR_FOLDER, "main.py"), '-p', prompt, '-o', outputPath]
+    command = [os.getenv('PYTHON'), '-u', os.path.join(os.getenv('GENERATOR_FOLDER'), "main.py"), '-p', prompt, '-o', outputPath]
 
     return streamOutput(command, None, filename)
 

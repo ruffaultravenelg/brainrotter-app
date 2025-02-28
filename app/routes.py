@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, request, send_from_directory, Response
 from app.generator import generateFromScript, generateFromPrompt
-
 main = Blueprint('main', __name__)
 
 @main.route('/')

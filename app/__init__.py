@@ -3,8 +3,7 @@ from app.routes import main
 import os
 import dotenv
 
-loadenv()
-
+dotenv.load_dotenv()
 
 def create_app():
     app = Flask(

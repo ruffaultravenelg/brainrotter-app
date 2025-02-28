@@ -4,7 +4,7 @@ import subprocess
 from flask import request, Response
 
 # Chemins de dossiers
-GENERATOR_FOLDER = os.getenv('GENERATOR_FOLDER', r'/home//brainrot')
+GENERATOR_FOLDER = os.getenv('GENERATOR_FOLDER', r'/home/ubuntu/brainrotter')
 FILES_FOLDER = os.getenv('FILES_FOLDER', r'files')
 PYTHON = os.getenv('PYTHON', 'python')
 
@@ -26,6 +26,7 @@ def generateFromScript():
         scriptFile.write(script)
 
     filename, outputPath = getOutputFileName()
+
     command = [PYTHON, '-u', os.path.join(GENERATOR_FOLDER, "main.py"), '-s', scriptPath, '-o', outputPath]
 
     return streamOutput(command, scriptPath, filename)

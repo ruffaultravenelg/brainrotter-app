@@ -6,6 +6,7 @@ from flask import request, Response
 # Chemins de dossiers
 GENERATOR_FOLDER = os.getenv('GENERATOR_FOLDER', r'/home//brainrot')
 FILES_FOLDER = os.getenv('FILES_FOLDER', r'files')
+PYTHON = os.getenv('PYTHON', 'python')
 
 def getOutputFileName():
     """Ensure the output folder exists and return a unique output file path."""
@@ -25,7 +26,7 @@ def generateFromScript():
         scriptFile.write(script)
 
     filename, outputPath = getOutputFileName()
-    command = ['python', '-u', os.path.join(GENERATOR_FOLDER, "main.py"), '-s', scriptPath, '-o', outputPath]
+    command = [PYTHON, '-u', os.path.join(GENERATOR_FOLDER, "main.py"), '-s', scriptPath, '-o', outputPath]
 
     return streamOutput(command, scriptPath, filename)
 
@@ -36,7 +37,7 @@ def generateFromPrompt():
         return Response('No prompt provided', status=400)
 
     filename, outputPath = getOutputFileName()
-    command = ['python', '-u', os.path.join(GENERATOR_FOLDER, "main.py"), '-p', prompt, '-o', outputPath]
+    command = [PYTHON, '-u', os.path.join(GENERATOR_FOLDER, "main.py"), '-p', prompt, '-o', outputPath]
 
     return streamOutput(command, None, filename)
 

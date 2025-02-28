@@ -1,6 +1,10 @@
 from flask import Flask
 from app.routes import main
 import os
+import dotenv
+
+loadenv()
+
 
 def create_app():
     app = Flask(
